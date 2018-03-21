@@ -59,6 +59,8 @@ str(train_sample)
 # split the data frames
 credit_train <- credit[train_sample, ]
 credit_test  <- credit[-train_sample, ]
+dim(credit_train)
+dim(credit_test)
 
 # check the proportion of class variable
 prop.table(table(credit_train$default))
@@ -72,6 +74,7 @@ credit_model <- C5.0(x = credit_train[-17], # col no. 17 is the responce variabl
 
 # display simple facts about the tree
 credit_model$names
+names(credit_model)
 credit_model$control
 credit_model$trials
 credit_model$size
