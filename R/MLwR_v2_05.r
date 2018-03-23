@@ -1,5 +1,5 @@
 ##### Chapter 5: Classification using Decision Trees and Rules -------------------
-rm (list = ls())
+
 if (! require ("C50")) {
   install.packages("C50")
 }
@@ -31,12 +31,8 @@ curve(-x * log2(x) - (1 - x) * log2(1 - x),
 
 ## Example: Identifying Risky Bank Loans ----
 ## Step 2: Exploring and preparing the data ----
-credit <- read.csv("R/credit.csv")
+credit <- read.csv("data/credit.csv")
 str(credit)
-dim(credit)
-dim(credit[credit$default =="yes", ])
-dim(credit[credit$default =="yes", ])[1]
-
 
 # look at two characteristics of the applicant
 table(credit$checking_balance)
@@ -59,8 +55,6 @@ str(train_sample)
 # split the data frames
 credit_train <- credit[train_sample, ]
 credit_test  <- credit[-train_sample, ]
-dim(credit_train)
-dim(credit_test)
 
 # check the proportion of class variable
 prop.table(table(credit_train$default))
@@ -74,7 +68,6 @@ credit_model <- C5.0(x = credit_train[-17], # col no. 17 is the responce variabl
 
 # display simple facts about the tree
 credit_model$names
-names(credit_model)
 credit_model$control
 credit_model$trials
 credit_model$size
@@ -111,8 +104,7 @@ CrossTable(credit_test$default,
 
 ## Boosting the accuracy of decision trees
 # boosted decision tree with 10 trials
-credit_boost10 <- C5.0(credit_train[-17], credit_train$default,
-                       trials = 10)
+credit_boost10 <- C5.0(credit_train[-17], credit_train$default, trials = 10)
 credit_boost10
 summary(credit_boost10)
 
@@ -147,7 +139,7 @@ CrossTable(credit_test$default, credit_cost_pred,
 
 ## Example: Identifying Poisonous Mushrooms ----
 ## Step 2: Exploring and preparing the data ----
-mushrooms <- read.csv("R/mushrooms.csv", stringsAsFactors = TRUE)
+mushrooms <- read.csv("data/mushrooms.csv", stringsAsFactors = TRUE)
 
 # examine the structure of the data frame
 str(mushrooms)

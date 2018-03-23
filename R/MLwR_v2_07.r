@@ -5,11 +5,11 @@
 
 ## Step 2: Exploring and preparing the data ----
 # read in data and examine structure
-concrete <- read.csv("concrete.csv")
+concrete <- read.csv("data/concrete.csv")
 str(concrete)
 
 # custom normalization function
-normalize <- function(x) { 
+normalize <- function(x) {
   return((x - min(x)) / (max(x) - min(x)))
 }
 
@@ -33,7 +33,7 @@ library(neuralnet)
 # simple ANN with only a single hidden neuron
 set.seed(12345) # to guarantee repeatable results
 concrete_model <- neuralnet(formula = strength ~ cement + slag +
-                              ash + water + superplastic + 
+                              ash + water + superplastic +
                               coarseagg + fineagg + age,
                               data = concrete_train)
 
@@ -52,7 +52,7 @@ cor(predicted_strength, concrete_test$strength)
 # a more complex neural network topology with 5 hidden neurons
 set.seed(12345) # to guarantee repeatable results
 concrete_model2 <- neuralnet(strength ~ cement + slag +
-                               ash + water + superplastic + 
+                               ash + water + superplastic +
                                coarseagg + fineagg + age,
                                data = concrete_train, hidden = 5)
 
@@ -69,7 +69,7 @@ cor(predicted_strength2, concrete_test$strength)
 
 ## Step 2: Exploring and preparing the data ----
 # read in data and examine structure
-letters <- read.csv("letterdata.csv")
+letters <- read.csv("data/letterdata.csv")
 str(letters)
 
 # divide into training and test data

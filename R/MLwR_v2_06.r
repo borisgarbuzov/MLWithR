@@ -4,7 +4,7 @@
 
 ## Understanding regression ----
 ## Example: Space Shuttle Launch Data ----
-launch <- read.csv("challenger.csv")
+launch <- read.csv("data/data/challenger.csv")
 
 # estimate beta manually
 b <- cov(launch$temperature, launch$distress_ct) / var(launch$temperature)
@@ -47,12 +47,13 @@ reg(y = launch$distress_ct, x = launch[2])
 reg(y = launch$distress_ct, x = launch[2:4])
 
 # confirming the multiple regression result using the lm function (not in text)
-model <- lm(distress_ct ~ temperature + pressure + launch_id, data = launch)
+launch$flight_num <- as.factor(launch$flight_num)
+model <- lm(distress_ct ~ temperature + pressure + flight_num, data = launch)
 model
 
 ## Example: Predicting Medical Expenses ----
 ## Step 2: Exploring and preparing the data ----
-insurance <- read.csv("insurance.csv", stringsAsFactors = TRUE)
+insurance <- read.csv("data/insurance.csv", stringsAsFactors = TRUE)
 str(insurance)
 
 # summarize the charges variable
@@ -73,10 +74,16 @@ pairs(insurance[c("age", "bmi", "children", "expenses")])
 # more informative scatterplot matrix
 library(psych)
 pairs.panels(insurance[c("age", "bmi", "children", "expenses")])
+?pairs.panels
 
 ## Step 3: Training a model on the data ----
 ins_model <- lm(expenses ~ age + children + bmi + sex + smoker + region,
                 data = insurance)
+
+summary(ins_model)
+
+ins_model <- lm(children ~ 1, data = insurance)
+
 ins_model <- lm(expenses ~ ., data = insurance) # this is equivalent to above
 
 # see the estimated beta coefficients
@@ -169,7 +176,7 @@ cor(p.rpart, wine_test$quality)
 
 # function to calculate the mean absolute error
 MAE <- function(actual, predicted) {
-  mean(abs(actual - predicted))  
+  mean(abs(actual - predicted))
 }
 
 # mean absolute error between predicted and actual values

@@ -3,7 +3,7 @@
 ## working with data from proprietary sources ----
 
 library(rio)
-credit <- import("credit.csv")
+credit <- import("data/credit.csv")
 export(credit, "credit.xlsx")
 convert("credit.csv", "credit.dta")
 
@@ -109,7 +109,7 @@ betweenness(karate)
 
 ## with dplyr
 library(dplyr)
-credit <- read.csv("credit.csv")
+credit <- read.csv("data/credit.csv")
 credit_tbl <- as.tbl(credit)
 credit_tbl
 
@@ -128,7 +128,7 @@ select(credit_tbl, amount)
 ## with data.table
 
 library(data.table)
-credit <- fread("credit.csv")
+credit <- fread("data/credit.csv")
 
 credit[credit_history == "good", mean(amount)]
 credit[, mean(amount), by=.(credit_history)]
@@ -136,7 +136,7 @@ credit[, mean(amount), by=.(credit_history)]
 ## with ffdf
 
 library(ff)
-credit <- read.csv.ffdf(file = "credit.csv", header = TRUE)
+credit <- read.csv.ffdf(file = "data/credit.csv", header = TRUE)
 
 mean(credit$amount) # this results in an error
 

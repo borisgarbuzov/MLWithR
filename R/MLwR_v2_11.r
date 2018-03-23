@@ -1,11 +1,11 @@
 ##### Chapter 11: Improving Model Performance -------------------
 
 # load the credit dataset
-credit <- read.csv("credit.csv")
+credit <- read.csv("data/credit.csv")
 library(caret)
 
 ## Creating a simple tuned model ----
-# automated parameter tuning of C5.0 decision tree 
+# automated parameter tuning of C5.0 decision tree
 set.seed(300)
 m <- train(default ~ ., data = credit, method = "C5.0")
 
@@ -35,7 +35,7 @@ grid <- expand.grid(.model = "tree",
 # look at the result of expand.grid()
 grid
 
-# customize train() with the control list and grid of parameters 
+# customize train() with the control list and grid of parameters
 set.seed(300)
 m <- train(default ~ ., data = credit, method = "C5.0",
            metric = "Kappa",

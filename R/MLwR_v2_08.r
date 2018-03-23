@@ -5,7 +5,7 @@
 
 # load the grocery data into a sparse matrix
 library(arules)
-groceries <- read.transactions("groceries.csv", sep = ",")
+groceries <- read.transactions("data/groceries.csv", sep = ",")
 summary(groceries)
 
 # look at the first five transactions

@@ -2,7 +2,7 @@
 
 ## Example: Finding Teen Market Segments ----
 ## Step 2: Exploring and preparing the data ----
-teens <- read.csv("snsdata.csv")
+teens <- read.csv("data/snsdata.csv")
 str(teens)
 
 # look at missing data for female variable

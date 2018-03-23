@@ -3,9 +3,12 @@
 pkgs <- c("party", "randomForest", "e1071")
 install.packages(pkgs, depend = TRUE)
 
+library(party)
+library(randomForest)
+library(e1071)
 
-creditcard_data <- read.csv("R/UCI_Credit_Card.csv")
-# View(creditcard_data)
+creditcard_data <- read.csv("data/UCI_Credit_Card.csv")
+View(creditcard_data)
 
 creditcard_data$default.payment.next.month <- as.factor(as.character(creditcard_data$default.payment.next.month))
 
@@ -32,7 +35,7 @@ print(fit)
 summary(fit)
 
 fit$cptable
-
+printcp(fit)
 plotcp(fit)
 
 fit.pruned <- prune(fit, cp = 0.01)
@@ -47,6 +50,8 @@ fit.perf <- table(creditcard_test$default.payment.next.month, fit.pred,
 fit.perf
 
 (5539 + 580)/(5539 + 580 + 1144 + 237)
+
+
 
 # % prediction accuracy = 0.8158667
 # The most important variable on the basis of which customers are

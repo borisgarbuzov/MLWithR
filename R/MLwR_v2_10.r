@@ -17,7 +17,7 @@ sms_results <- data.frame(actual_type = sms_test_labels,
 # write.csv(sms_results, "sms_results.csv", row.names = FALSE)
 
 ## Confusion matrixes in R ----
-sms_results <- read.csv("sms_results.csv")
+sms_results <- read.csv("data/sms_results.csv")
 
 # the first several test cases
 head(sms_results)
@@ -122,7 +122,7 @@ unlist(perf.auc@y.values)
 
 # partitioning data
 library(caret)
-credit <- read.csv("credit.csv")
+credit <- read.csv("data/credit.csv")
 
 # Holdout method
 # using random IDs
@@ -147,7 +147,7 @@ library(caret)
 library(C50)
 library(irr)
 
-credit <- read.csv("credit.csv")
+credit <- read.csv("data/credit.csv")
 
 set.seed(123)
 folds <- createFolds(credit$default, k = 10)

@@ -1,10 +1,10 @@
 ##### Chapter 3: Classification using Nearest Neighbors --------------------
 
 ## Example: Classifying Cancer Samples ----
-## Step 2: Exploring and preparing the data ---- 
+## Step 2: Exploring and preparing the data ----
 
 # import the CSV file
-wbcd <- read.csv("wisc_bc_data.csv", stringsAsFactors = FALSE)
+wbcd <- read.csv("data/wisc_bc_data.csv", stringsAsFactors = FALSE)
 
 # examine the structure of the wbcd data frame
 str(wbcd)
@@ -54,9 +54,10 @@ wbcd_test_labels <- wbcd[470:569, 1]
 # load the "class" library
 library(class)
 
-wbcd_test_pred <- knn(train = wbcd_train, test = wbcd_test,
+wbcd_test_pred <- knn.cv(train = wbcd_train, test = wbcd_test,
                       cl = wbcd_train_labels, k = 21)
 
+summary(wbcd_test_pred)
 ## Step 4: Evaluating model performance ----
 
 # load the "gmodels" library
