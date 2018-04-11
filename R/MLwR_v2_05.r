@@ -78,8 +78,6 @@ credit_model$output
 
 C50::C5imp(credit_model)
 
-
-
 # display detailed information about the tree
 summary(credit_model)
 
