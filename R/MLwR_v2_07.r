@@ -79,11 +79,36 @@ letters_test  <- letters[16001:20000, ]
 ## Step 3: Training a model on the data ----
 # begin by training a simple linear SVM
 library(kernlab)
-letter_classifier <- ksvm(letter ~ ., data = letters_train,
+lc1 <- ksvm(letter ~ ., data = letters_train,
                           kernel = "vanilladot")
 
 # look at basic information about the model
-letter_classifier
+lc1
+
+alpha_lc <- lc1@alpha
+alpha(lc1)
+
+library(e1071)
+plot(lc1, letters, width ~ height)
+
+
+
+lc2 <- ksvm(letter ~ .,
+            data = letters_train,
+            type = "C-svc",
+            kernel = 'rbf',
+            kpar = list(sigma=1),
+            C=1)
+
+library("foreign")
+library(caret)
+lc.svm.caret <- caret::train(letter ~ .,
+                      letters,
+                      method = "svmLinear",
+                      trControl = trainControl(method='cv'),
+               preProcess = c('center', 'scale'))
+kernlab::plot(lc.svm.caret$finalModel, data = letters)
+
 
 ## Step 4: Evaluating model performance ----
 # predictions on testing dataset
